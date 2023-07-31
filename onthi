@@ -1,0 +1,111 @@
+# This is a simple exam review application written in Python.
+
+# Import the necessary modules.
+import random
+
+# Define a function to generate a random question.
+def generate_question():
+  # Choose a random topic.
+  topic = random.choice(["Math", "Science", "History", "English"])
+
+  # Choose a random question from the topic.
+  question = random.choice(questions[topic])
+
+  # Return the question and the answer choices.
+  return question, answers[topic][question]
+
+# Define a function to display a question to the user.
+def display_question(question, answer_choices):
+  # Print the question to the console.
+  print(question)
+
+  # Print the answer choices to the console.
+  for i, answer_choice in enumerate(answer_choices):
+    print("({}) {}".format(i + 1, answer_choice))
+
+# Define a function to get the user's answer to a question.
+def get_user_answer(question, answer_choices):
+  # Get the user's answer to the question.
+  user_answer = input("Your answer: ")
+
+  # Return the user's answer.
+  return user_answer
+
+# Define a function to check the user's answer to a question.
+def check_answer(question, user_answer, answer_choices):
+  # Get the correct answer to the question.
+  correct_answer = answer_choices[int(user_answer) - 1]
+
+  # Check if the user's answer is correct.
+  if user_answer == correct_answer:
+    return True
+  else:
+    return False
+
+# Define a function to display the user's score.
+def display_score(score):
+  # Print the user's score to the console.
+  print("Your score is {} out of {}".format(score, total_questions))
+
+# Define a function to start the exam.
+def start_exam():
+  # Initialize the score to 0.
+  score = 0
+
+  # Loop over all the questions.
+  for i in range(total_questions):
+    # Generate a random question.
+    question, answer_choices = generate_question()
+
+    # Display the question to the user.
+    display_question(question, answer_choices)
+
+    # Get the user's answer to the question.
+    user_answer = get_user_answer(question, answer_choices)
+
+    # Check the user's answer to the question.
+    if check_answer(question, user_answer, answer_choices):
+      # Increment the score.
+      score += 1
+
+  # Display the user's score.
+  display_score(score)
+
+# Define the main function.
+def main():
+  # Print the welcome message.
+  print("Welcome to the exam review application!")
+
+  # Get the number of questions.
+  number_of_questions = int(input("How many questions do you want to review? "))
+
+  # Create a list of questions.
+  questions = []
+
+  # Loop over the number of questions.
+  for i in range(number_of_questions):
+    # Get the question from the user.
+    question = input("Enter question {}: ".format(i + 1))
+
+    # Get the answer choices from the user.
+    answer_choices = input("Enter answer choices for question {}: ".format(i + 1)).split()
+
+    # Add the question and answer choices to the list of questions.
+    questions.append((question, answer_choices))
+
+  # Create a list of answers.
+  answers = []
+
+  # Loop over the list of questions.
+  for question, answer_choices in questions:
+    # Get the correct answer from the user.
+    correct_answer = input("Enter the correct answer for question {}: ".format(question))
+
+    # Add the correct answer to the list of answers.
+    answers.append(correct_answer)
+
+  # Start the exam.
+  start_exam()
+
+# Call the main function.
+if __name__ ==
